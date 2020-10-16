@@ -81,5 +81,35 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Price Out of setting range")
     end
+
+    it 'category_idが空の場合保存できない' do
+      @item.category_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
+
+    it 'status_idを選択していないと保存できないこと' do
+      @item.status_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Status can't be blank")
+    end
+
+    it 'ship_charge_idを選択していないと保存できないこと' do
+      @item.ship_charge_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Ship charge can't be blank")
+    end
+
+    it 'ship_region_idを選択していないと保存できないこと' do
+      @item.ship_region_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Ship region can't be blank")
+    end
+
+    it 'ship_day_idを選択しないないと保存できないこと' do
+      @item.ship_day_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Ship day can't be blank")
+    end
   end
 end
