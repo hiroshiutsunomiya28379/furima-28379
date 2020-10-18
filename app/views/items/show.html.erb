@@ -63,7 +63,7 @@
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= ItemShipDayGenre.data[@item.ship_day_id] %></td>
+          <td class="detail-value"><%= ItemShipDayGenre.data[@item.ship_day_id][:name] %></td>
         </tr>
       </tbody>
     </table>
@@ -102,7 +102,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class='another-item'><%= ItemCategoryGenre.data[@item.category_id][:name] %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
