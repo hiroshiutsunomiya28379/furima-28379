@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: :show 
+  before_action :set_item, only: [:show, :edit]
   
   def index
     @items = Item.all.order("created_at DESC")
@@ -17,6 +17,9 @@ class ItemsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
   end
 
   def show
