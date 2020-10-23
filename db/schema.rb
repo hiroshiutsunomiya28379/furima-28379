@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_19_200403) do
+ActiveRecord::Schema.define(version: 2020_10_21_080551) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 2020_10_19_200403) do
   end
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "trade_id", null: false
     t.string "postal_code", default: "", null: false
-    t.integer "prefecture", null: false
+    t.integer "prefecture_id", null: false
     t.string "city", default: "", null: false
     t.string "house_number", default: "", null: false
     t.string "building_name", default: ""
     t.string "phone_number", default: "", null: false
+    t.bigint "trade_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["trade_id"], name: "index_addresses_on_trade_id"

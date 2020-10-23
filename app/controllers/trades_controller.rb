@@ -3,13 +3,18 @@ class TradesController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def new
+    @trade = UserTrade.new
+  end
+
   def create
-    Address.create(address_params)
+    @trade = UserTrade.new(trade_params)
+    @trade.save
   end
 
   private
 
-  def address_params
-    params.permit(:postal_code, :prefecture, :city, :house_number, :building_name, :phone_number)
+  def trade_params
+    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :trade_id, :user_id, :item_id)
   end
 end
