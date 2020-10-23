@@ -8,7 +8,9 @@ class TradesController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @trade = UserTrade.new(trade_params)
+    
     if @trade.valid?
       pay_item
       @trade.save
@@ -21,7 +23,7 @@ class TradesController < ApplicationController
   private
 
   def trade_params
-    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :trade_id, :user_id, :item_id).merge(token: params[:token])
+    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id).merge(token: params[:token], user_id: current_user.id)
   end
 
   def pay_item
