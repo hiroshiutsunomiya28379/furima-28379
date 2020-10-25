@@ -1,21 +1,19 @@
 class TradesController < ApplicationController
   before_action :authenticate_user!
+  before_action :move_to_index
 
   def index
     @item = Item.find(params[:item_id])
-  end
-
-  def new
-    @trade = UserTrade.new
+    @user_trade = UserTrade.new
   end
 
   def create
     @item = Item.find(params[:item_id])
-    @trade = UserTrade.new(trade_params)
+    @user_trade = UserTrade.new(trade_params)
     
-    if @trade.valid?
+    if @user_trade.valid?
       pay_item
-      @trade.save
+      @user_trade.save
       return redirect_to root_path
     else
       render 'index'
@@ -25,7 +23,7 @@ class TradesController < ApplicationController
   private
 
   def trade_params
-    params.permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :item_id).merge(token: params[:token], user_id: current_user.id)
+    params.require(:user_trade).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
   end
 
   def pay_item
@@ -35,5 +33,12 @@ class TradesController < ApplicationController
       card: trade_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 end
