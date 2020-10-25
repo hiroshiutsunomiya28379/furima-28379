@@ -9,6 +9,7 @@ class UserTrade
     validates :prefecture_id, numericality: { other_than: 0, message: "Select"}
     validates :phone_number, numericality: { only_integer: true, message: "Input only number"}
   end
+  validates :phone_number, length: { maximum: 11 }
 
   def save
 
