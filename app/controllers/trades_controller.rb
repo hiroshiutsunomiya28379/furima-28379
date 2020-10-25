@@ -1,7 +1,7 @@
 class TradesController < ApplicationController
   before_action :authenticate_user!
-  before_action :move_to_index
   before_action :set_item
+  before_action :move_to_index
 
   def index
     @user_trade = UserTrade.new
@@ -35,7 +35,6 @@ class TradesController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     if current_user.id == @item.user_id || @item.trade != nil
       redirect_to root_path
     end
