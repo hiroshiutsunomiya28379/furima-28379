@@ -37,7 +37,7 @@ class TradesController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id
+    if current_user.id == @item.user_id || @item.trade != nil
       redirect_to root_path
     end
   end
