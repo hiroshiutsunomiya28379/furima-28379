@@ -57,6 +57,12 @@ RSpec.describe UserTrade, type: :model do
     expect(@user_trade.errors.full_messages).to include("Phone number Input only number")
   end
 
+  it 'phone_numberは11桁より多いと保存できない' do
+    @user_trade.phone_number = '090123456789'
+    @user_trade.valid?
+    expect(@user_trade.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+  end
+
   it 'tokenが空では保存できないこと' do
     @user_trade.token = nil
     @user_trade.valid?
