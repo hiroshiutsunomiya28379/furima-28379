@@ -9,6 +9,11 @@ RSpec.describe UserTrade, type: :model do
     expect(@user_trade).to be_valid
   end
 
+  it '建物名が空でも保存できること' do
+    @user_trade.building_name = nil
+    expect(@user_trade).to be_valid
+  end
+
   it 'postal_codeが空だと保存できないこと' do
     @user_trade.postal_code = nil
     @user_trade.valid?
